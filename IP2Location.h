@@ -65,7 +65,7 @@ extern "C" {
 
 #include "IP2Loc_DBInterface.h"
 
-#define API_VERSION   4.0.0
+#define API_VERSION   7.0.0
 #define MAX_IPV4_RANGE  4294967295U
 #define MAX_IPV6_RANGE  "340282366920938463463374607431768211455"
 #define IPV4 0
@@ -115,6 +115,10 @@ typedef struct
 	uint32_t databasecount;
 	uint32_t databaseaddr;
 	uint32_t ipversion;
+	uint32_t ipv4databasecount;
+	uint32_t ipv4databaseaddr;
+	uint32_t ipv6databasecount;
+	uint32_t ipv6databaseaddr;
 } IP2Location;
 
 typedef struct 
@@ -140,11 +144,6 @@ typedef struct
 	float elevation;
 	char *usagetype;
 } IP2LocationRecord;
-
-typedef struct StringList{
-	char* data;
-	struct StringList* next;
-} StringList;
 
 /*##################
 # Public Functions
@@ -175,24 +174,6 @@ IP2LocationRecord *IP2Location_get_usagetype(IP2Location *loc, char *ip);
 IP2LocationRecord *IP2Location_get_all(IP2Location *loc, char *ip);
 void IP2Location_free_record(IP2LocationRecord *record);
 void IP2Location_delete_shm();
-
-/*###################
-# Private Functions
-###################*/
-
-int IP2Location_initialize(IP2Location *loc);
-IP2LocationRecord *IP2Location_new_record();
-uint32_t IP2Location_ip2no(char* ip);
-struct in6_addr_local  IP2Location_ipv6_to_no(char* ipaddr);
-int IP2Location_ip_is_ipv4 (char* ipaddr);
-int IP2Location_ip_is_ipv6 (char* ipaddr);
-IP2LocationRecord *IP2Location_get_record(IP2Location *loc, char *ip, uint32_t mode);
-IP2LocationRecord *IP2Location_get_ipv6_record(IP2Location *loc, char *ipstring, uint32_t mode);
-StringList* IP2Location_split(char* delimiters, char* targetString, unsigned int flags, int limit);
-char* IP2Location_replace(char* substr, char* replace, char* targetString);
-unsigned int IP2Location_substr_count(char* substr, char* targetString);
-unsigned int StringListCount (StringList* toCount);
-void FreeStringList (StringList* toFree);
 
 #ifdef __cplusplus
 }
