@@ -1,1 +1,6 @@
 *.o
+*.cache
+*.log
+.DS_Store
+*.status
+Makefile
