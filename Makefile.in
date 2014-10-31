@@ -4,4 +4,4 @@ ip2location:
 install:
 	gcc -dynamiclib *.o -o @prefix@/lib/libIP2Location.dylib
 	cp IP2Loc_DBInterface.h @prefix@/include/IP2Loc_DBInterface.h
-	cp IP2Location.c @prefix@/include/IP2Location.h
+	cp IP2Location.h @prefix@/include/IP2Location.h
